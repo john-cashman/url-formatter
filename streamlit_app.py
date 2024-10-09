@@ -13,8 +13,8 @@ def format_url(url):
     elif url.startswith('https://'):
         url = url[8:]  # Remove the first 8 characters
 
-    # Replace 'xx' with 'tt'
-    url = url.replace('xx', 'tt')
+    # Replace hxxps:// with https://
+    url = url.replace('hxxps://', 'https://')
 
     # Add https:// if not present
     if not url.startswith('https://'):
@@ -37,6 +37,10 @@ if st.button("Format URLs"):
     
     # Display formatted URLs in a text area for easy copying
     st.text_area("Here are your formatted URLs:", formatted_output, height=200, key='formatted_urls')
+
+    # Instruction for users
+    st.write("You can copy the formatted URLs above by selecting them and pressing Ctrl+C (or Cmd+C on Mac).")
+
 
     # Instruction for users
     st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. The copy to clipboard button did not work 🥲")
