@@ -1,4 +1,3 @@
-# Save this as app.py
 import streamlit as st
 
 def format_url(url):
@@ -29,16 +28,18 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
     
     st.write("Formatted URLs:")
+    # Displaying the formatted URLs in a text area
     st.text_area("Here are your formatted URLs:", formatted_output, height=200)
 
-    # Add a copy button using HTML and JavaScript
-    copy_button_html = f"""
-    <button id="copy-button" onclick="navigator.clipboard.writeText(`{formatted_output}`)">Copy to Clipboard</button>
-    <script>
-    document.getElementById("copy-button").onclick = function() {{
-        alert("Formatted URLs copied to clipboard!");
-    }};
-    </script>
-    """
-
-    st.markdown(copy_button_html, unsafe_allow_html=True)
+    # Adding a copy button using HTML and JavaScript
+    st.markdown(
+        f"""
+        <button onclick="navigator.clipboard.writeText(`{formatted_output}`)">Copy to Clipboard</button>
+        <script>
+            navigator.clipboard.writeText(`{formatted_output}`).then(function() {{
+                alert('Formatted URLs copied to clipboard!');
+            }});
+        </script>
+        """, 
+        unsafe_allow_html=True
+    )
