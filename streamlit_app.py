@@ -4,6 +4,12 @@ def format_url(url):
     # Remove leading/trailing spaces
     url = url.strip()
     
+    # Remove http:// or https:// from the beginning
+    if url.startswith('http://'):
+        url = url[7:]  # Remove the first 7 characters
+    elif url.startswith('https://'):
+        url = url[8:]  # Remove the first 8 characters
+    
     # Replace 'xx' with 'tt'
     url = url.replace('xx', 'tt')
     
@@ -33,4 +39,4 @@ if st.button("Format URLs"):
     st.text_area("Here are your formatted URLs:", formatted_output, height=200, key='formatted_urls')
 
     # Instruction for users
-    st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. Sorry the fancy copy to clipboard button didn't work 🥲")
+    st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. The copy to clipboard button did not work 🥲")
