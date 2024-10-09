@@ -23,38 +23,6 @@ def format_url(url):
 
     return url
 
-# Function to display the confetti effect
-def confetti():
-    st.components.v1.html("""
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.4.0/confetti.browser.min.js"></script>
-        <script>
-            const launchConfetti = () => {
-                var end = Date.now() + (5 * 1000);
-                var colors = ['#bb0000', '#ffffff', '#00bb00', '#0000bb'];
-                (function frame() {
-                    confetti({
-                        particleCount: 5,
-                        angle: 60,
-                        spread: 55,
-                        origin: { x: 0, y: 1 },
-                        colors: colors
-                    });
-                    confetti({
-                        particleCount: 5,
-                        angle: 120,
-                        spread: 55,
-                        origin: { x: 1, y: 1 },
-                        colors: colors
-                    });
-                    if (Date.now() < end) {
-                        requestAnimationFrame(frame);
-                    }
-                })();
-            };
-            launchConfetti();
-        </script>
-    """, height=0)
-
 st.title("URL Formatter")
 
 # Text area for user to paste URLs
@@ -71,8 +39,5 @@ if st.button("Format URLs"):
     # Display formatted URLs in a text area for easy copying
     st.text_area("Here are your formatted URLs:", formatted_output, height=200, key='formatted_urls')
 
-    # Display confetti effect
-    confetti()
-
     # Instruction for users
-    st.write("You can copy the formatted URLs above by selecting them and pressing Ctrl+C (or Cmd+C on Mac).")
+    st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. Fancy button coming in Version 2 👀")
