@@ -7,10 +7,11 @@ def format_url(url):
     # Remove unwanted characters first
     url = url.replace('[', '').replace(']', '')
     
-    # Remove http:// or https:// from the beginning
-    if url.startswith('http://'):
+    # Remove hxxp:// from the beginning
+    if url.startswith('hxxp://'):
         url = url[7:]  # Remove the first 7 characters
-    elif url.startswith('https://'):
+    # Remove hxxps:// from the beginning
+    elif url.startswith('hxxps://'):
         url = url[8:]  # Remove the first 8 characters
 
     # Replace hxxps:// with https://
@@ -40,7 +41,6 @@ if st.button("Format URLs"):
 
     # Instruction for users
     st.write("You can copy the formatted URLs above by selecting them and pressing Ctrl+C (or Cmd+C on Mac).")
-
 
     # Instruction for users
     st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. The copy to clipboard button did not work 🥲")
