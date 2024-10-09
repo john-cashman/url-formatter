@@ -28,18 +28,9 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
     
     st.write("Formatted URLs:")
-    # Displaying the formatted URLs in a text area
-    st.text_area("Here are your formatted URLs:", formatted_output, height=200)
+    
+    # Display formatted URLs in a text area for easy copying
+    st.text_area("Here are your formatted URLs:", formatted_output, height=200, key='formatted_urls')
 
-    # Adding a copy button using HTML and JavaScript
-    st.markdown(
-        f"""
-        <button onclick="navigator.clipboard.writeText(`{formatted_output}`)">Copy to Clipboard</button>
-        <script>
-            navigator.clipboard.writeText(`{formatted_output}`).then(function() {{
-                alert('Formatted URLs copied to clipboard!');
-            }});
-        </script>
-        """, 
-        unsafe_allow_html=True
-    )
+    # Instruction for users
+    st.write("You can copy the formatted URLs above by selecting them and pressing Ctrl+C (or Cmd+C on Mac).")
