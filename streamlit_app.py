@@ -4,22 +4,22 @@ def format_url(url):
     # Remove leading/trailing spaces
     url = url.strip()
     
+    # Remove unwanted characters first
+    url = url.replace('[', '').replace(']', '')
+    
     # Remove http:// or https:// from the beginning
     if url.startswith('http://'):
         url = url[7:]  # Remove the first 7 characters
     elif url.startswith('https://'):
         url = url[8:]  # Remove the first 8 characters
-    
+
     # Replace 'xx' with 'tt'
     url = url.replace('xx', 'tt')
-    
-    # Remove unwanted characters
-    url = url.replace('[', '').replace(']', '')
-    
+
     # Add https:// if not present
     if not url.startswith('https://'):
         url = 'https://' + url
-    
+
     return url
 
 st.title("URL Formatter")
