@@ -33,4 +33,4 @@ if st.button("Format URLs"):
     st.text_area("Here are your formatted URLs:", formatted_output, height=200, key='formatted_urls')
 
     # Instruction for users
-    st.write("You can copy the formatted URLs above by selecting them and pressing Ctrl+C (or Cmd+C on Mac).")
+    st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C on Mac. Sorry the fancy copy to clipboard button didn't work 🥲")
