@@ -2,6 +2,12 @@
 import streamlit as st
 
 def format_url(url):
+    # Remove leading/trailing spaces
+    url = url.strip()
+    
+    # Replace 'xx' with 'tt'
+    url = url.replace('xx', 'tt')
+    
     # Remove unwanted characters
     url = url.replace('[', '').replace(']', '')
     
