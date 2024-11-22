@@ -16,7 +16,7 @@ def format_url(url):
     # Replace any remaining 'hxxps://' with 'https://'
     url = url.replace('hxxps://', 'https://')
 
-    # Ensure the URL starts with 'https://'
+    # Ensure the URL starts with 'https://', but avoid duplication
     if not url.startswith('https://'):
         url = 'https://' + url
     
@@ -25,7 +25,7 @@ def format_url(url):
 st.title("URL Formatter")
 
 # Text area for user to paste URLs
-urls_input = st.text_area("Paste your URLs here, separated by new lines. This is a test:")
+urls_input = st.text_area("Paste your URLs here, separated by new lines:")
 urls = urls_input.split("\n")
 
 # Format URLs and display them
