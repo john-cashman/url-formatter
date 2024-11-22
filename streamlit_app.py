@@ -6,23 +6,20 @@ def format_url(url):
     
     # Remove unwanted characters like '[' and ']'
     url = url.replace('[', '').replace(']', '')
+
+    # Remove common prefixes: http://, https://, hxxp://, hxxps://
+    prefixes = ['http://', 'https://', 'hxxp://', 'hxxps://']
     
-    # Handle 'hxxp://' or 'hxxps://'
-    if url.startswith('hxxp://'):
-        url = url[7:]  # Remove 'hxxp://'
-    elif url.startswith('hxxps://'):
-        url = url[8:]  # Remove 'hxxps://'
+    for prefix in prefixes:
+        if url.startswith(prefix):
+            url = url[len(prefix):]  # Remove the prefix
 
-    # Replace any remaining 'hxxps://' with 'https://'
-    url = url.replace('hxxps://', 'https://')
-
-    # Ensure the URL starts with 'https://', but avoid duplication
-    if not url.startswith('https://'):
-        url = 'https://' + url
+    # After removing the prefix, add 'https://' to the start of the URL
+    url = 'https://' + url
     
     return url
 
-st.title("URL Formatter")
+st.title("URL Formatter - Version 2")
 
 # Text area for user to paste URLs
 urls_input = st.text_area("Paste your URLs here, separated by new lines:")
