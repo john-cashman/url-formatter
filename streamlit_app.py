@@ -25,7 +25,7 @@ def format_url(url):
 st.title("URL Formatter")
 
 # Text area for user to paste URLs
-urls_input = st.text_area("Paste your URLs here, separated by new lines:")
+urls_input = st.text_area("Paste your URLs here, separated by new lines. This is a test:")
 urls = urls_input.split("\n")
 
 # Format URLs and display them
