@@ -7,19 +7,19 @@ def format_url(url):
     # Remove unwanted characters like '[' and ']'
     url = url.replace('[', '').replace(']', '')
     
-    # Check for hxxp:// or hxxps:// and handle accordingly
+    # Handle 'hxxp://' or 'hxxps://'
     if url.startswith('hxxp://'):
-        url = url[7:]  # Remove the first 7 characters
+        url = url[7:]  # Remove 'hxxp://'
     elif url.startswith('hxxps://'):
-        url = url[8:]  # Remove the first 8 characters
-    
-    # Replace any hxxps:// with https://
+        url = url[8:]  # Remove 'hxxps://'
+
+    # Replace any remaining 'hxxps://' with 'https://'
     url = url.replace('hxxps://', 'https://')
 
-    # Add https:// if the URL doesn't start with it
+    # Ensure the URL starts with 'https://'
     if not url.startswith('https://'):
         url = 'https://' + url
-
+    
     return url
 
 st.title("URL Formatter")
@@ -30,7 +30,7 @@ urls = urls_input.split("\n")
 
 # Format URLs and display them
 if st.button("Format URLs"):
-    # Strip out empty lines
+    # Strip out empty lines and format the URLs
     formatted_urls = [format_url(url.strip()) for url in urls if url.strip()]
     formatted_output = "\n".join(formatted_urls)
     
@@ -42,7 +42,7 @@ if st.button("Format URLs"):
     # Provide instructions for users
     st.write("You can copy the formatted URLs above by selecting them and pressing Cmd+C (Mac) or Ctrl+C (Windows).")
     
-    # Optional: Add a copy-to-clipboard button
+    # Add copy-to-clipboard functionality using a custom button (with JavaScript)
     st.markdown("""
     <script type="text/javascript">
         function copyToClipboard() {
