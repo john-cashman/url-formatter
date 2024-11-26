@@ -8,7 +8,7 @@ def format_url(url):
     url = url.replace('[', '').replace(']', '')
     
     # List of prefixes to remove
-    prefixes = ['http://', 'https://', 'hxxp://', 'hxxps://', 'hXXp://', 'hXXps://']
+    prefixes = ['http://', 'https://', 'hxxp://', 'hxxps://', 'hXXp://', 'hXXps://', ​'https://']
     
     # Remove the matching prefix if it exists
     for prefix in prefixes:
