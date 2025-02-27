@@ -22,7 +22,7 @@ def format_url(url):
 
     return url
 
-st.title("URL Formatter")
+st.title("URL Fixer")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload a file containing URLs (one per line):", type=["txt"])
