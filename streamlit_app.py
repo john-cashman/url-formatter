@@ -15,9 +15,9 @@ def format_url(url):
         if url.lower().startswith(prefix):
             url = url[len(prefix):]  # Remove the prefix
     
-    # Ensure the URL starts with 'https://'
+    # Ensure the URL starts with 'https://' only once
     if not url.lower().startswith('https://'):
-        url = 'https://' + url
+        url = 'https://' + url.lstrip('/')
     
     return url
 
