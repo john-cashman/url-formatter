@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
+from streamlit_clipboard import st_clipboard
 
 def format_url(url):
     # Remove hidden Unicode characters (e.g., zero-width spaces)
@@ -16,22 +17,6 @@ def format_url(url):
     url = 'https://' + url.lstrip('/')
 
     return url
-
-def create_copy_button(text_to_copy):
-    button_id = "copyButton"
-    button_html = f"""
-    <button id="{button_id}" style="margin-top: 10px;">Copy to Clipboard</button>
-    <script>
-    document.getElementById("{button_id}").onclick = function() {{
-        navigator.clipboard.writeText(`{text_to_copy}`).then(function() {{
-            alert('Copied to clipboard!');
-        }}, function(err) {{
-            console.error('Could not copy text: ', err);
-        }});
-    }}
-    </script>
-    """
-    st.markdown(button_html, unsafe_allow_html=True)
 
 st.title("URL Formatter")
 
@@ -65,5 +50,5 @@ if st.button("Format URLs"):
     # Display formatted URLs in a text area for easy copying
     st.text_area("Formatted URLs:", formatted_output, height=200, key='formatted_urls')
     
-    # Add a copy button
-    create_copy_button(formatted_output)
+    # Copy to clipboard button
+    st_clipboard(formatted_output)
