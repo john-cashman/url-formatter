@@ -25,11 +25,9 @@ uploaded_file = st.file_uploader("Upload a file containing URLs (TXT or CSV):", 
 urls = []
 if uploaded_file is not None:
     if uploaded_file.name.endswith(".csv"):
-        # Read CSV and assume URLs are in one of the columns
-        df = pd.read_csv(uploaded_file, encoding='utf-8', dtype=str)
-        
-        # Flatten all data into a list (handles cases where URLs might be in multiple columns)
-        urls = df.astype(str).values.flatten().tolist()
+        # Read only the first column of the CSV
+        df = pd.read_csv(uploaded_file, encoding='utf-8', dtype=str, usecols=[0])
+        urls = df.iloc[:, 0].dropna().astype(str).tolist()
     else:
         # Read TXT file
         urls = uploaded_file.getvalue().decode("utf-8", errors="ignore").splitlines()
