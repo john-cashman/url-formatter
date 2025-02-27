@@ -19,25 +19,21 @@ def format_url(url):
 
 st.title("URL Formatter")
 
-# File uploader
-uploaded_file = st.file_uploader("Upload a file containing URLs (TXT or CSV):", type=["txt", "csv"])
+# Multiple file uploader
+uploaded_files = st.file_uploader("Upload CSV files containing URLs:", type=["csv"], accept_multiple_files=True)
 
 urls = []
-if uploaded_file is not None:
-    if uploaded_file.name.endswith(".csv"):
-        # Read only the first column of the CSV
+if uploaded_files:
+    for uploaded_file in uploaded_files:
+        # Read only the first column of each CSV
         df = pd.read_csv(uploaded_file, encoding='utf-8', dtype=str, usecols=[0])
-        urls = df.iloc[:, 0].dropna().astype(str).tolist()
-    else:
-        # Read TXT file
-        urls = uploaded_file.getvalue().decode("utf-8", errors="ignore").splitlines()
-    
-    # Convert to plain text to remove hidden characters
-    urls = [url.encode("ascii", errors="ignore").decode() for url in urls]
-else:
-    # Text area for user to paste URLs
-    urls_input = st.text_area("Paste your URLs here, separated by new lines:")
-    urls = urls_input.split("\n")
+        file_urls = df.iloc[:, 0].dropna().astype(str).tolist()
+        urls.extend(file_urls)
+
+# Manual text input
+urls_input = st.text_area("Or paste URLs here, separated by new lines:")
+if urls_input.strip():
+    urls.extend(urls_input.split("\n"))
 
 # Format URLs and display them
 if st.button("Format URLs"):
