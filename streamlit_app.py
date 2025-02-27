@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit_clipboard as sc
 
 def format_url(url):
     # Remove leading/trailing spaces
@@ -41,7 +40,8 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
     
     st.write("### Formatted URLs:")
-    st.code(formatted_output, language="text")
     
-    # Copy to clipboard button
-    sc.copy_to_clipboard(formatted_output, text="Copy to Clipboard here")
+    # Display formatted URLs in a text area for easy copying
+    st.text_area("Formatted URLs:", formatted_output, height=200, key='formatted_urls')
+    
+    st.write("You can copy the formatted URLs above by selecting them and pressing **Cmd+C (Mac) or Ctrl+C (Windows)**.")
