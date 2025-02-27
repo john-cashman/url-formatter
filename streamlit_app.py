@@ -44,4 +44,4 @@ if st.button("Format URLs"):
     st.code(formatted_output, language="text")
     
     # Copy to clipboard button
-    sc.copy_to_clipboard(formatted_output, text="Copy to Clipboard")
+    sc.copy_to_clipboard(formatted_output, text="Copy to Clipboard here")
