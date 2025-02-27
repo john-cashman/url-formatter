@@ -2,30 +2,21 @@ import streamlit as st
 import re
 
 def format_url(url):
+    # Remove hidden Unicode characters (e.g., zero-width spaces)
+    url = url.encode("ascii", "ignore").decode()
+
     # Remove leading/trailing spaces and unwanted characters
     url = url.strip().replace('[', '').replace(']', '')
 
-    # Normalize URL for comparison (case insensitive)
-    url_lower = url.lower()
+    # Remove all occurrences of 'http://' and 'https://' at the beginning
+    url = re.sub(r'^(https?://)+', '', url, flags=re.IGNORECASE)
 
-    # List of prefixes to remove
-    prefixes = ['http://', 'https://', 'hxxp://', 'hxxps://', 'hXXp://', 'hXXps://']
-
-    # Remove the matching prefix if it exists
-    for prefix in prefixes:
-        if url_lower.startswith(prefix):
-            url = url[len(prefix):]  # Remove the prefix
-            break  # Stop after removing the first matching prefix
-
-    # Ensure the URL starts with 'https://' only once
+    # Ensure the URL starts with 'https://'
     url = 'https://' + url.lstrip('/')
-
-    # Final check: If 'https://' appears more than once, remove extras
-    url = re.sub(r'^(https://)+', 'https://', url)
 
     return url
 
-st.title("URL Formatter")
+st.title("URL Formatter V.2")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload a file containing URLs (one per line):", type=["txt"])
