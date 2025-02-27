@@ -28,11 +28,8 @@ uploaded_file = st.file_uploader("Upload a file containing URLs (one per line):"
 
 urls = []
 if uploaded_file is not None:
-    urls = uploaded_file.getvalue().decode("utf-8").splitlines()
-else:
-    # Text area for user to paste URLs
-    urls_input = st.text_area("Paste your URLs here, separated by new lines:")
-    urls = urls_input.split("\n")
+    urls = uploaded_file.getvalue().decode("utf-8", errors="ignore").splitlines()
+    urls = [url.encode("ascii", errors="ignore").decode() for url in urls]  # Convert to plain text
 
 # Format URLs and display them
 if st.button("Format URLs"):
@@ -40,8 +37,4 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
     
     st.write("### Formatted URLs:")
-    
-    # Display formatted URLs in a text area for easy copying
-    st.text_area("Formatted URLs:", formatted_output, height=200, key='formatted_urls')
-    
-    st.write("You can copy the formatted URLs above by selecting them and pressing **Cmd+C (Mac) or Ctrl+C (Windows)**.")
+    st.write(formatted_output)
