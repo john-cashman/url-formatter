@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 
 def format_url(url):
     # Remove leading/trailing spaces and unwanted characters
@@ -17,12 +18,14 @@ def format_url(url):
             break  # Stop after removing the first matching prefix
 
     # Ensure the URL starts with 'https://' only once
-    if not url.lower().startswith('https://'):
-        url = 'https://' + url.lstrip('/')
+    url = 'https://' + url.lstrip('/')
+
+    # Final check: If 'https://' appears more than once, remove extras
+    url = re.sub(r'^(https://)+', 'https://', url)
 
     return url
 
-st.title("URL Fixer")
+st.title("URL Formatter")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload a file containing URLs (one per line):", type=["txt"])
