@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import re
 
 def format_url(url):
@@ -16,15 +17,25 @@ def format_url(url):
 
     return url
 
-st.title("URL Formatter V.2")
+st.title("URL Formatter")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload a file containing URLs (one per line):", type=["txt"])
+uploaded_file = st.file_uploader("Upload a file containing URLs (TXT or CSV):", type=["txt", "csv"])
 
 urls = []
 if uploaded_file is not None:
-    urls = uploaded_file.getvalue().decode("utf-8", errors="ignore").splitlines()
-    urls = [url.encode("ascii", errors="ignore").decode() for url in urls]  # Convert to plain text
+    if uploaded_file.name.endswith(".csv"):
+        # Read CSV and assume URLs are in one of the columns
+        df = pd.read_csv(uploaded_file, encoding='utf-8', dtype=str)
+        
+        # Flatten all data into a list (handles cases where URLs might be in multiple columns)
+        urls = df.astype(str).values.flatten().tolist()
+    else:
+        # Read TXT file
+        urls = uploaded_file.getvalue().decode("utf-8", errors="ignore").splitlines()
+    
+    # Convert to plain text to remove hidden characters
+    urls = [url.encode("ascii", errors="ignore").decode() for url in urls]
 else:
     # Text area for user to paste URLs
     urls_input = st.text_area("Paste your URLs here, separated by new lines:")
