@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import re
-from streamlit_clipboard import st_clipboard
 
 def format_url(url):
     # Remove hidden Unicode characters (e.g., zero-width spaces)
@@ -47,8 +46,15 @@ if st.button("Format URLs"):
     
     st.write("### Formatted URLs:")
     
-    # Display formatted URLs in a text area for easy copying
+    # Display formatted URLs in a text area
     st.text_area("Formatted URLs:", formatted_output, height=200, key='formatted_urls')
-    
-    # Copy to clipboard button
-    st_clipboard(formatted_output)
+
+    # JavaScript-based copy button
+    st.markdown(
+        f"""
+        <button onclick="navigator.clipboard.writeText(document.getElementById('formatted_urls').value); alert('Copied!');">
+            Copy to Clipboard
+        </button>
+        """,
+        unsafe_allow_html=True
+    )
