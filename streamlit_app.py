@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import re
-from streamlit_copy_to_clipboard import copy_to_clipboard
 
 def format_url(url):
     """Formats a URL by removing unwanted characters and ensuring it starts with https://."""
@@ -34,7 +33,4 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
 
     st.write("### Formatted URLs:")
-    st.text_area("Formatted URLs:", formatted_output, height=200, key='formatted_urls')
-
-    # Copy to clipboard functionality
-    copy_to_clipboard(formatted_output)
+    st.text_area("Formatted URLs:", formatted_output, height=200) #removed key='formatted_urls'
