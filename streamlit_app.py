@@ -33,4 +33,4 @@ if st.button("Format URLs"):
     formatted_output = "\n".join(formatted_urls)
 
     st.write("### Formatted URLs:")
-    st.text_area("Formatted URLs:", formatted_output, height=200) #removed key='formatted_urls'
+    st.code(formatted_output, language="text") # Use st.code() here
